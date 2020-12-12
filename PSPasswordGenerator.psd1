@@ -77,7 +77,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PowerShell Core', 'PasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows', 'Windows PowerShell')
+        Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows')
 
         # A URL to the license for this module.
         LicenseUri = 'https://www.gnu.org/licenses/agpl-3.0.en.html'
