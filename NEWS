@@ -1,0 +1,13 @@
+PasswordGenerator -- history of user-visible changes.
+Last update: 2020-12-12
+
+PasswordGenerator version 2.0.0, released 12/12/2020
+----------------------------------------------------
+This is the first public release, so everything is new to the world. If
+you happen to have an earlier version, you'll notice that passwords are
+now returned as SecureString objects.  To restore the earlier behavior,
+add the -AsPlainText paramter.
+
+To learn more about this module, run these commands:
+    Get-Help New-RandomPassword
+    Get-Help about_PasswordGenerator

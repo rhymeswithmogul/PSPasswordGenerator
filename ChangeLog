@@ -1,0 +1,10 @@
+Version 2.0.0 (December 12, 2020):
+- Initial public release to GitHub and PowerShell Gallery.
+- Made SecureString output the default, with the -AsPlainText parameter
+  introduced to emulate the earlier behavior from the 1.x versions.
+- Help!  There's help now.  Plenty of it.
+
+Versions 1.0.0 (2016) through 1.2.1 (whenever):
+- These versions were a single script that this author used his own use,
+  and probably shared it with a few friends and colleagues. They weren't
+  released publicly.
