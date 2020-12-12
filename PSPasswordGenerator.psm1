@@ -1,5 +1,5 @@
 <#
-    PasswordGenerator.psm1, code for the PasswordGenerator module
+    PSPasswordGenerator.psm1, code for the PSPasswordGenerator module
     Copyright (C) 2016-2020 Colin Cogle <colin@colincogle.name>
     Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
@@ -19,7 +19,7 @@
 
 #Requires -Version 3.0
 
-# .ExternalHelp PasswordGenerator-help.xml
+# .ExternalHelp PSPasswordGenerator-help.xml
 Function New-RandomPassword {
 	[CmdletBinding(DefaultParameterSetName='Securely')]
 	[OutputType([String], ParameterSetName='Insecurely')]

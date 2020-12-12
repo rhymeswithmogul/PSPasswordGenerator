@@ -1,6 +1,6 @@
 ---
-external help file: PasswordGenerator-help.xml
-Module Name: PasswordGenerator
+external help file: PSPasswordGenerator-help.xml
+Module Name: PSPasswordGenerator
 online version: https://github.com/rhymeswithmogul/PSPasswordGenerator/blob/main/man/en-US/New-RandomPassword.md
 schema: 2.0.0
 ---
@@ -34,7 +34,7 @@ This cmdlet creates a random password with the specified parameters.  You can ge
 PS C:\> $secureStr = New-RandomPassword -Length 32
 ```
 
-Generates a 32-character password and saves it as a SecureString object.  This can be used in PowerShell scripts.  For one example, run Get-Help about_PasswordGenerator.
+Generates a 32-character password and saves it as a SecureString object.  This can be used in PowerShell scripts.  For one example, run Get-Help about_PSPasswordGenerator.
 
 ### Example 2
 ```powershell
@@ -168,4 +168,4 @@ This cmdlet can generate passwords with very high entropy, but they might be lon
 
 ## RELATED LINKS
 
-[about_PasswordGenerator]()
+[about_PSPasswordGenerator]()

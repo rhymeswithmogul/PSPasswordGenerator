@@ -1,5 +1,5 @@
 <#
-    PasswordGenerator.psm1, manifest for the PasswordGenerator module
+    PSPasswordGenerator.psm1, manifest for the PSPasswordGenerator module
     Copyright (C) 2016-2020 Colin Cogle <colin@colincogle.name>
     Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
@@ -19,7 +19,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'PasswordGenerator.psm1'
+RootModule = 'PSPasswordGenerator.psm1'
 
 # Version number of this module.
 ModuleVersion = '2.0.0'
@@ -59,16 +59,16 @@ AliasesToExport = @('Get-RandomPassword')
 
 # List of all files packaged with this module
 FileList = @(
-    'en-US/about_PasswordGenerator.help.txt',
-    'en-US/PasswordGenerator-help.xml',
+    'en-US/about_PSPasswordGenerator.help.txt',
+    'en-US/PSPasswordGenerator-help.xml',
     'AUTHORS',
     'ChangeLog',
     'CONTRIBUTING.md',
     'COPYING',
     'LICENSE',
     'NEWS',
-    'PasswordGenerator.psd1',
-    'PasswordGenerator.psm1'
+    'PSPasswordGenerator.psd1',
+    'PSPasswordGenerator.psm1'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
@@ -77,7 +77,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PowerShell Core', 'PSPasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows', 'Windows PowerShell')
+        Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PowerShell Core', 'PasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows', 'Windows PowerShell')
 
         # A URL to the license for this module.
         LicenseUri = 'https://www.gnu.org/licenses/agpl-3.0.en.html'
@@ -86,7 +86,7 @@ PrivateData = @{
         ProjectUri = 'https://www.github.com/rhymeswithmogul/PSPasswordGenerator'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PasswordGenerator.png'
+        IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://www.github.com/rhymeswithmogul/PSPasswordGenerator/main/blob/NEWS'
