@@ -17,7 +17,7 @@ By default, this cmdlet returns password as a `SecureString` object.  This is gr
 ```powershell
 PS> Import-Module PSPasswordGenerator
 PS> $passwd = New-RandomPassword -Length 240 -UseExtendedAscii -UseAmbigiousCharacters
-PS> $credentials = [Management.Automation.PSCredential]::new('DOMAIN\_ServiceAccount'), $passwd)
+PS> $credentials = [Management.Automation.PSCredential]::new('DOMAIN\_ServiceAccount', $passwd)
 
 PS> Import-Module DHCPServer
 PS> Set-DHCPServerDNSCredential -Credential $credentials
