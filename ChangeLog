@@ -1,3 +1,8 @@
+Version 2.0.1 (January 13, 2021):
+- Generated passwords are now properly removed from memory once they
+  are displayed to the user.  Previously, this did not work, and would
+  occasionally create a spurious error message.
+
 Version 2.0.0 (December 12, 2020):
 - Initial public release to GitHub and PowerShell Gallery.
 - Made SecureString output the default, with the -AsPlainText parameter
