@@ -1,6 +1,6 @@
 <#
     PSPasswordGenerator.psm1, manifest for the PSPasswordGenerator module
-    Copyright (C) 2016-2020 Colin Cogle <colin@colincogle.name>
+    Copyright (C) 2016-2021 Colin Cogle <colin@colincogle.name>
     Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
     This program is free software:  you can redistribute it and/or modify it
@@ -22,7 +22,7 @@
 RootModule = 'PSPasswordGenerator.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.0.0'
+ModuleVersion = '2.0.1'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -37,7 +37,7 @@ Author = 'Colin Cogle'
 CompanyName = $null
 
 # Copyright statement for this module
-Copyright = '(c) 2016-2020 Colin Cogle. All rights reserved.'
+Copyright = '(c) 2016-2021 Colin Cogle. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Generate random passwords with the constraints you want.'
