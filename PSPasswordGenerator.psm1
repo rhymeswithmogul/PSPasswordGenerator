@@ -1,6 +1,6 @@
 <#
     PSPasswordGenerator.psm1, code for the PSPasswordGenerator module
-    Copyright (C) 2016-2020 Colin Cogle <colin@colincogle.name>
+    Copyright (C) 2016-2021 Colin Cogle <colin@colincogle.name>
     Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
     This program is free software:  you can redistribute it and/or modify it
