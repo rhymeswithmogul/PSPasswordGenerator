@@ -1,8 +1,12 @@
 PSPasswordGenerator -- history of user-visible changes.
-Last update: 2020-12-12
+Last update: 2021-01-13
+
+PSPasswordGenerator version 2.0.1, released 1/13/2021
+-----------------------------------------------------
+This is a bug-fix release with no visible changes.
 
 PSPasswordGenerator version 2.0.0, released 12/12/2020
-----------------------------------------------------
+------------------------------------------------------
 This is the first public release, so everything is new to the world. If
 you happen to have an earlier version, you'll notice that passwords are
 now returned as SecureString objects.  To restore the earlier behavior,
