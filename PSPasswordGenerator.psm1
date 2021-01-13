@@ -78,7 +78,7 @@ Function New-RandomPassword {
 		Return $ret
 	} Else {
 		$ss = ConvertTo-SecureString -AsPlainText -Force -String $ret
-		Remove-Variable -Name $ret -ErrorAction SilentlyContinue
+		Remove-Variable -Name 'ret' -ErrorAction SilentlyContinue
 		Return $ss
 	}
 }
