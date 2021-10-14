@@ -19,10 +19,10 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'PSPasswordGenerator.psm1'
+RootModule = 'src/PSPasswordGenerator.psm1'
 
 # Version number of this module.
-ModuleVersion = '2.0.1'
+ModuleVersion = '3.0.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -61,14 +61,17 @@ AliasesToExport = @('Get-RandomPassword')
 FileList = @(
     'en-US/about_PSPasswordGenerator.help.txt',
     'en-US/PSPasswordGenerator-help.xml',
+    'icon/PSPasswordGenerator.png',
+    'src/PSPasswordGenerator.psm1',
     'AUTHORS',
     'ChangeLog',
+    'CODE_OF_CONDUCT.md',
     'CONTRIBUTING.md',
     'COPYING',
     'LICENSE',
     'NEWS',
     'PSPasswordGenerator.psd1',
-    'PSPasswordGenerator.psm1'
+    'README.md'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
@@ -93,6 +96,9 @@ PrivateData = @{
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         RequireLicenseAcceptance = $false
+
+        # Beta?
+        Prerelease = 'alpha'
 
     } # End of PSData hashtable
 
