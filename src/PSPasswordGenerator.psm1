@@ -121,9 +121,10 @@ Function New-RandomPassword {
 				Write-Debug "Trying separator $ch."
 				$separator = [Convert]::ToByte([Char]$ch)
 			} While (
-				($separator -ge 65 -and $separator -le 90) `
-				-or ($separator -ge 97 -and $separator -le 122) `
-				-or ($separator -gt 127 -and -Not $UseExtendedAscii) `
+				($separator -ge 65 -and $separator -le 90)				<# No uppercase letters #> `
+				-or ($separator -ge 97 -and $separator -le 122)			<# No lowercase letters #> `
+				-or ($separator -ge 128 -and $separator -le 165)		<# No accented letters  #> `
+				-or ($separator -gt 165 -and -Not $UseExtendedAscii)	<# Unwanted extended ASCII #> `
 			)
 
 			Write-Debug "WORD=`"$word`", SEP=`"$([Char]$separator)`""
