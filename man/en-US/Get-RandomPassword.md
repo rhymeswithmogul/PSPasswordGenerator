@@ -1,7 +1,7 @@
 ---
 external help file: PSPasswordGenerator-help.xml
 Module Name: PSPasswordGenerator
-online version: https://github.com/rhymeswithmogul/PSPasswordGenerator/blob/main/man/en-US/New-RandomPassword.md
+online version: https://github.com/rhymeswithmogul/PSPasswordGenerator/blob/main/man/en-US/Get-RandomPassword.md
 schema: 2.0.0
 ---
 
