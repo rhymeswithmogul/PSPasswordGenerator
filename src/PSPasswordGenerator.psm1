@@ -20,13 +20,13 @@
 #Requires -Version 3.0
 
 # .ExternalHelp PSPasswordGenerator-help.xml
-Function New-RandomPassword {
+Function Get-RandomPassword {
 	[CmdletBinding(DefaultParameterSetName='RandomSecurely')]
 	[OutputType([String], ParameterSetName='RandomInsecurely')]
 	[OutputType([String], ParameterSetName='WordsInsecurely')]
 	[OutputType([Security.SecureString], ParameterSetName='RandomSecurely')]
 	[OutputType([Security.SecureString], ParameterSetName='WordsSecurely')]
-	[Alias('Get-RandomPassword')]
+	[Alias('New-RandomPassword')]
 	Param(
 		[Parameter(ParameterSetName='RandomInsecurely')]
 		[Parameter(ParameterSetName='RandomSecurely')]
@@ -117,7 +117,7 @@ Function New-RandomPassword {
 			# Letters are 65-90 (caps) and 97-122 (lower)
 			$separator = 0
 			Do {
-				$ch = (New-RandomPassword -Length 1 -NoSymbols:$NoSymbols -AsPlainText -UseExtendedAscii:$UseExtendedAscii)
+				$ch = (Get-RandomPassword -Length 1 -NoSymbols:$NoSymbols -AsPlainText -UseExtendedAscii:$UseExtendedAscii)
 				Write-Debug "Trying separator $ch."
 				$separator = [Convert]::ToByte([Char]$ch)
 			} While (

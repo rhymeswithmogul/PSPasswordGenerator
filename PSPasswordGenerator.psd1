@@ -46,7 +46,7 @@ Description = 'Generate random passwords with the constraints you want.'
 PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('New-RandomPassword')
+FunctionsToExport = @('Get-RandomPassword')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -55,7 +55,7 @@ CmdletsToExport = @()
 VariablesToExport = ''
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = @('Get-RandomPassword')
+AliasesToExport = @('New-RandomPassword')
 
 # List of all files packaged with this module
 FileList = @(

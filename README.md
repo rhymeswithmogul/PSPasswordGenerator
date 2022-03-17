@@ -16,7 +16,7 @@ By default, this cmdlet returns password as a `SecureString` object.  This is gr
 
 ```powershell
 PS> Import-Module PSPasswordGenerator
-PS> $passwd = New-RandomPassword -Length 240 -UseExtendedAscii -UseAmbigiousCharacters
+PS> $passwd = Get-RandomPassword -Length 240 -UseExtendedAscii -UseAmbigiousCharacters
 PS> $credentials = [Management.Automation.PSCredential]::new('DOMAIN\_ServiceAccount', $passwd)
 
 PS> Import-Module DHCPServer
@@ -24,14 +24,14 @@ PS> Set-DHCPServerDNSCredential -Credential $credentials
 ```
 
 However, in many cases, you might be using this module to generate random passwords for use outside of PowerShell.  In that case, supply the `-AsPlainText` parameter.  (As this is a valid use, I won't make you also include the `-Force` parameter.)
-```powershell
-PS> New-RandomPassword -Length 32 -AsPlainText
+```
+PS> Get-RandomPassword -Length 32 -AsPlainText
 i%eS+R5y4q^4wZ#E>(kNCKuU]R}hQZ"H
 ```
 
 Or, you can make something secure but a lot more human-friendly with the new word list support!  (<abbr title="Bring your own">BYO</abbr> wordlist.)
-```powershell
-PS> New-RandomPassword -Words 3 -WordList 'my-wordlist.txt'
+```
+PS> Get-RandomPassword -Words 3 -WordList 'my-wordlist.txt'
 illustration.Mainspring"Muleteer
 ```
 

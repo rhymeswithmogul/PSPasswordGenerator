@@ -5,7 +5,7 @@ online version: https://github.com/rhymeswithmogul/PSPasswordGenerator/blob/main
 schema: 2.0.0
 ---
 
-# New-RandomPassword
+# Get-RandomPassword
 
 ## SYNOPSIS
 Creates a random password.
@@ -14,25 +14,25 @@ Creates a random password.
 
 ### RandomSecurely (Default)
 ```
-New-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-NoSymbols] [-UseAmbiguousCharacters]
+Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### RandomInsecurely
 ```
-New-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
+Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### WordsSecurely
 ```
-New-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-NoSymbols] [-UseAmbiguousCharacters]
+Get-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### WordsInsecurely
 ```
-New-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
+Get-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
@@ -43,14 +43,14 @@ This cmdlet creates a random password with the specified parameters.  You can ge
 
 ### Example 1
 ```powershell
-PS C:\> $secureStr = New-RandomPassword -Length 32
+PS C:\> $secureStr = Get-RandomPassword -Length 32
 ```
 
 Generates a 32-character password and saves it as a SecureString object.  This can be used in PowerShell scripts.  For one example, run Get-Help about_PSPasswordGenerator.
 
 ### Example 2
 ```powershell
-PS C:\> New-RandomPassword -AsPlainText -Length 16
+PS C:\> Get-RandomPassword -AsPlainText -Length 16
 \#aT*fAg]u5$):%a
 ```
 
@@ -58,7 +58,7 @@ Generates a 16-character password and prints it to the output stream.  You can t
 
 ### Example 3
 ```powershell
-PS C:\> New-RandomPassword -AsPlainText -Words 3 -WordList 'mywordlist.txt'
+PS C:\> Get-RandomPassword -AsPlainText -Words 3 -WordList 'mywordlist.txt'
 stern4Trainer%exocycloida
 ```
 
@@ -66,7 +66,7 @@ Generates a three-word password and prints it to the output stream.  You can the
 
 ### Example 4
 ```powershell
-PS C:\> $svcAccountPassword = New-RandomPassword -Length 240 -UseAmbigiousCharacters -UseExtendedAscii
+PS C:\> $svcAccountPassword = Get-RandomPassword -Length 240 -UseAmbigiousCharacters -UseExtendedAscii
 ```
 
 Generates a 240-character password that can be as random as possible.  This is good practice for making service accounts in Active Directory Domain Services, where a human will never need to type the password by hand.
@@ -151,11 +151,11 @@ Accept wildcard characters: False
 ```
 
 ### -UseExtendedAscii
-By default, the extended ASCII character set is not used.  Specify this switch to make your passwords more random and contain far more entropy.  However, you will no longer be able to type them on a standard keyboard.  In addition, some services may not permit these special characters.  However, specifying this switch greatly increases entropy, as the character pool is roughly doubled.
+By default, the extended ASCII character set is not used.  Specify this switch to make your passwords more random and contain far more entropy.  However, you will no longer be able to type them easily on a standard keyboard.  In addition, some services may not permit these special characters.  However, specifying this switch greatly increases entropy, as the character pool is roughly doubled.
 
 If the -NoSymbols parameter is specified, then this parameter has no effect.
 
-Note that this will not affect any words pulled from a wordlist.  If your wordlist contains extended ASCII (or Unicode) characters, NOT using this switch will have no effect.
+When using WordList mode, this will only affect the separator characters.  It not affect any words pulled from a wordlist.
 
 ```yaml
 Type: SwitchParameter
