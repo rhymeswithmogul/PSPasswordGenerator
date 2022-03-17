@@ -1,6 +1,6 @@
 <#
     PSPasswordGenerator.psm1, code for the PSPasswordGenerator module
-    Copyright (C) 2016-2021 Colin Cogle <colin@colincogle.name>
+    Copyright (C) 2016-2022 Colin Cogle <colin@colincogle.name>
     Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
     This program is free software:  you can redistribute it and/or modify it
@@ -21,21 +21,41 @@
 
 # .ExternalHelp PSPasswordGenerator-help.xml
 Function New-RandomPassword {
-	[CmdletBinding(DefaultParameterSetName='Securely')]
-	[OutputType([String], ParameterSetName='Insecurely')]
-	[OutputType([Security.SecureString], ParameterSetName='Securely')]
+	[CmdletBinding(DefaultParameterSetName='RandomSecurely')]
+	[OutputType([String], ParameterSetName='RandomInsecurely')]
+	[OutputType([String], ParameterSetName='WordsInsecurely')]
+	[OutputType([Security.SecureString], ParameterSetName='RandomSecurely')]
+	[OutputType([Security.SecureString], ParameterSetName='WordsSecurely')]
 	[Alias('Get-RandomPassword')]
 	Param(
-		[Parameter(ParameterSetName='Insecurely')]
-		[Switch] $AsPlainText,
-
+		[Parameter(ParameterSetName='RandomInsecurely')]
+		[Parameter(ParameterSetName='RandomSecurely')]
 		[ValidateRange(1, [UInt32]::MaxValue)]
-		[Alias('Count', 'Size')]
+		[Alias('Count', 'MinLength', 'Size')]
 		[UInt32] $Length = 16,
 
+		[Parameter(ParameterSetName='RandomInsecurely')]
+		[Parameter(ParameterSetName='RandomSecurely')]
 		[Switch] $StartWithLetter,
+
+		[Parameter(ParameterSetName='WordsInsecurely')]
+		[Parameter(ParameterSetName='WordsSecurely')]
+		[ValidateRange(1, [UInt32]::MaxValue)]
+		[UInt32] $Words = 3,
+
+		[Parameter(ParameterSetName='WordsInsecurely', Mandatory)]
+		[Parameter(ParameterSetName='WordsSecurely', Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[IO.FileInfo] $WordList,
+
+		[Parameter(ParameterSetName='RandomInsecurely', Mandatory)]
+		[Parameter(ParameterSetName='WordsInsecurely', Mandatory)]
+		[Switch] $AsPlainText,
+
 		[Switch] $NoSymbols,
+
 		[Switch] $UseAmbiguousCharacters,
+
 		[Switch] $UseExtendedAscii
 	)
 
@@ -45,33 +65,74 @@ Function New-RandomPassword {
 	}
 
 	$ret = ""
-	For ($i = 0; $i -lt $Length; $i++) {
-		Do {
+	If ($PSCmdlet.ParameterSetName -Like 'Random*') {
+		For ($i = 0; $i -lt $Length; $i++) {
 			Do {
 				Do {
 					Do {
-						$x = Get-Random -Minimum 33 -Maximum 254
-						Write-Debug "Considering character: $([char]$x)"
-					} While ($x -eq 127 -Or (-Not $UseExtendedAscii -And $x -gt 127))
-					# The above Do..While loop does this:
-					#  1. Don't allow ASCII 127 (delete).
-					#  2. Don't allow extended ASCII, unless the user wants it.
+						Do {
+							$x = Get-Random -Minimum 33 -Maximum 254
+							Write-Debug "Considering character: $([char]$x)"
+						} While ($x -eq 127 -Or (-Not $UseExtendedAscii -And $x -gt 127))
+						# The above Do..While loop does this:
+						#  1. Don't allow ASCII 127 (delete).
+						#  2. Don't allow extended ASCII, unless the user wants it.
 
-				} While (-Not $UseAmbiguousCharacters -And ($x -In @(49,73,108,124,48,79)))
-				# The above loop disallows 1 (ASCII 49), I (73), l (108),
-				# | (124), 0 (48) or O (79) -- unless the user wants those.
+					} While (-Not $UseAmbiguousCharacters -And ($x -In @(49,73,108,124,48,79)))
+					# The above loop disallows 1 (ASCII 49), I (73), l (108),
+					# | (124), 0 (48) or O (79) -- unless the user wants those.
 
-			} While ($NoSymbols -And ($x -lt 48 -Or ($x -gt 57 -And $x -lt 65) -Or ($x -gt 90 -And $x -lt 97) -Or $x -gt 122))
-			# If the -NoSymbols parameter was specified, this loop will ensure
-			# that the character is neither a symbol nor in the extended ASCII
-			# character set.
-			
-		} While ($i -eq 0 -And $StartWithLetter -And -Not (($x -ge 65 -And $x -le 90) -Or ($x -ge 97 -And $x -le 122)))
-		# If the -StartWithLetter parameter was specified, this loop will make
-		# sure that the first character is an upper- or lower-case letter.
+				} While ($NoSymbols -And ($x -lt 48 -Or ($x -gt 57 -And $x -lt 65) -Or ($x -gt 90 -And $x -lt 97) -Or $x -gt 122))
+				# If the -NoSymbols parameter was specified, this loop will ensure
+				# that the character is neither a symbol nor in the extended ASCII
+				# character set.
+				
+			} While ($i -eq 0 -And $StartWithLetter -And -Not (($x -ge 65 -And $x -le 90) -Or ($x -ge 97 -And $x -le 122)))
+			# If the -StartWithLetter parameter was specified, this loop will make
+			# sure that the first character is an upper- or lower-case letter.
 
-		Write-Debug "SUCCESS: Adding character: $([char]$x)"
-		$ret += [char]$x
+			Write-Debug "SUCCESS: Adding character: $([char]$x)"
+			$ret += [char]$x
+		}
+	}
+
+	# If we're generating random words:
+	Else {
+		# There is DEFINITELY room for improvement here.  Loading an entire
+		# wordlist into memory can be quite cumbersome.
+		$allWords = Get-Content -LiteralPath $WordList -ErrorAction Stop
+		$culture  = (Get-Culture).TextInfo
+
+		$ret = ''
+		For ($i = 0; $i -lt $Words; $i++) {
+			# Pick a random word from the list.
+			$word = Get-Random $allWords
+
+			# Randomly capitalize the first letter of the word.
+			If ((Get-Random) % 2) {
+				$word = $culture.ToTitleCase($word)
+			}
+
+			# Stick something in between the words.
+			# Letters are 65-90 (caps) and 97-122 (lower)
+			$separator = 0
+			Do {
+				$ch = (New-RandomPassword -Length 1 -NoSymbols:$NoSymbols -AsPlainText -UseExtendedAscii:$UseExtendedAscii)
+				Write-Debug "Trying separator $ch."
+				$separator = [Convert]::ToByte([Char]$ch)
+			} While (
+				($separator -ge 65 -and $separator -le 90) `
+				-or ($separator -ge 97 -and $separator -le 122) `
+				-or ($separator -gt 127 -and -Not $UseExtendedAscii) `
+			)
+
+			Write-Debug "WORD=`"$word`", SEP=`"$([Char]$separator)`""
+			$ret += $word
+			$ret += [Char]$separator
+		}
+
+		# Chop off the final separator.
+		$ret = $ret.Substring(0, $ret.Length - 1)
 	}
 
 	If ($AsPlainText) {

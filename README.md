@@ -28,6 +28,13 @@ However, in many cases, you might be using this module to generate random passwo
 PS> New-RandomPassword -Length 32 -AsPlainText
 i%eS+R5y4q^4wZ#E>(kNCKuU]R}hQZ"H
 ```
+
+Or, you can make something secure but a lot more human-friendly with the new word list support!  (<abbr title="Bring your own">BYO</abbr> wordlist.)
+```powershell
+PS> New-RandomPassword -Words 3 -WordList 'my-wordlist.txt'
+illustration.Mainspring"Muleteer
+```
+
 Then, copy and paste that into whatever service or device is asking for a password.
 
 ## Disclaimers

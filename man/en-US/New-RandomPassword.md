@@ -12,20 +12,32 @@ Creates a random password.
 
 ## SYNTAX
 
-### Securely (Default)
+### RandomSecurely (Default)
 ```
 New-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
-### Insecurely
+### RandomInsecurely
 ```
-New-RandomPassword [-AsPlainText] [-Length <UInt32>] [-StartWithLetter] [-NoSymbols] [-UseAmbiguousCharacters]
+New-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
+ [-UseExtendedAscii] [<CommonParameters>]
+```
+
+### WordsSecurely
+```
+New-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-NoSymbols] [-UseAmbiguousCharacters]
+ [-UseExtendedAscii] [<CommonParameters>]
+```
+
+### WordsInsecurely
+```
+New-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
  [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This cmdlet creates a random password with the specified parameters.  You can generate passwords with any length you want, and include or restrict characters depending on what constrains your password must abide by.
+This cmdlet creates a random password with the specified parameters.  You can generate passwords with any length you want, or with as many random words as you want; and include or restrict characters depending on what constrains your password must abide by.
 
 ## EXAMPLES
 
@@ -46,6 +58,14 @@ Generates a 16-character password and prints it to the output stream.  You can t
 
 ### Example 3
 ```powershell
+PS C:\> New-RandomPassword -AsPlainText -Words 3 -WordList 'mywordlist.txt'
+stern4Trainer%exocycloida
+```
+
+Generates a three-word password and prints it to the output stream.  You can then copy and paste it for use outside of PowerShell, or pipe it to a command such as Out-File to store it (probably insecurely).  Note that you must supply a wordlist to the cmdlet.
+
+### Example 4
+```powershell
 PS C:\> $svcAccountPassword = New-RandomPassword -Length 240 -UseAmbigiousCharacters -UseExtendedAscii
 ```
 
@@ -58,10 +78,10 @@ By default, the password is returned as a [System.Security.SecureString].  Speci
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: Insecurely
+Parameter Sets: RandomInsecurely, WordsInsecurely
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -73,8 +93,8 @@ The generated password will always be of the specified length.  You can specify 
 
 ```yaml
 Type: UInt32
-Parameter Sets: (All)
-Aliases: Count, Size
+Parameter Sets: RandomSecurely, RandomInsecurely
+Aliases: Count, MinLength, Size
 
 Required: False
 Position: Named
@@ -105,7 +125,7 @@ If this switch is specified, the first character of the password will be either 
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: RandomSecurely, RandomInsecurely
 Aliases:
 
 Required: False
@@ -135,9 +155,41 @@ By default, the extended ASCII character set is not used.  Specify this switch t
 
 If the -NoSymbols parameter is specified, then this parameter has no effect.
 
+Note that this will not affect any words pulled from a wordlist.  If your wordlist contains extended ASCII (or Unicode) characters, NOT using this switch will have no effect.
+
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WordList
+A plain text file containing one word per line.  This will be loaded into memory when generating a password containing words.
+
+```yaml
+Type: FileInfo
+Parameter Sets: WordsSecurely, WordsInsecurely
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Words
+When generating a password made up of random words, the password should contain this many words.  Each word will be separated by a single number, symbol (only if -NoSymbols is not specified), or an extended ASCII character (only if -UseExtendedAscii is specified).
+
+```yaml
+Type: UInt32
+Parameter Sets: WordsSecurely, WordsInsecurely
 Aliases:
 
 Required: False
@@ -165,6 +217,8 @@ If the -AsPlainText parameter is specified.
 
 ## NOTES
 This cmdlet can generate passwords with very high entropy, but they might be longer or stronger than your service allows.  For example, this cmdlet could generate a password with 4.2 billion characters, but Microsoft 365 passwords are limited to 256 characters.  Make good passwords, but be aware of your service's limits.
+
+Also, when generating passwords of random words, note that the size of your wordlist will have a direct effect on performance.
 
 ## RELATED LINKS
 

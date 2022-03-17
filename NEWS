@@ -1,5 +1,14 @@
 PSPasswordGenerator -- history of user-visible changes.
-Last update: 2021-01-13
+Last update: 2022-03-17
+
+PSPasswordGenerator version 3.0.0, released 3/17/2022
+-----------------------------------------------------
+Not dead yet!  This version adds support for generating passwords that
+are made of random words.  Use the -Words and -WordList parameters and
+generate more readable passwords, like:
+ * hemolytic<sheeptick=Planned                                                                         
+ * Pachydermatouspowder³Est                                                                                  
+ * blackberries<kitakyushu#imcompressibility%roadway
 
 PSPasswordGenerator version 2.0.1, released 1/13/2021
 -----------------------------------------------------
