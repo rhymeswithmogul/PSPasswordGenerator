@@ -1,3 +1,5 @@
+[![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/PSPasswordGenerator?include_prereleases)](https://powershellgallery.com/packages/PSPasswordGenerator/) [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/PSPasswordGenerator)](https://powershellgallery.com/packages/v/PSPasswordGenerator)
+
 # PowerShell PSPasswordGenerator Module
 This module provides a convenient way to generate passwords that are at most as cryptographically secure as the `Get-Random` cmdlet's source of entropy can provide.
 
