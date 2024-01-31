@@ -1,3 +1,7 @@
+Version 3.1.0 (January 31, 2024):
+- Added a new switch, -ExcludeCharacters, to generate passwords without
+  certain user-specified characters. Thank you for the idea, wwc-trevor!
+
 Version 3.0.0 (March 17, 2022):
 - We can now generate human-friendly passwords from wordlists.
 - This cmdlet has been renamed Get-RandomPassword, as "Get" is a better

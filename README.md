@@ -26,7 +26,7 @@ PS> Set-DHCPServerDNSCredential -Credential $credentials
 ```
 
 However, in many cases, you might be using this module to generate random passwords for use outside of PowerShell.  In that case, supply the `-AsPlainText` parameter.  (As this is a valid use, I won't make you also include the `-Force` parameter.)
-```
+```powershell
 PS> Get-RandomPassword -Length 32 -AsPlainText
 i%eS+R5y4q^4wZ#E>(kNCKuU]R}hQZ"H
 ```
