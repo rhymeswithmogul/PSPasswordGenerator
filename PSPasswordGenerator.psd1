@@ -1,20 +1,20 @@
 <#
-    PSPasswordGenerator.psm1, manifest for the PSPasswordGenerator module
-    Copyright (C) 2016-2022 Colin Cogle <colin@colincogle.name>
-    Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
+	PSPasswordGenerator.psm1, manifest for the PSPasswordGenerator module
+	Copyright (C) 2016-2022, 2024 Colin Cogle <colin@colincogle.name>
+	Online at <https://github.com/rhymeswithmogul/PSPasswordGenerator>
 
-    This program is free software:  you can redistribute it and/or modify it
-    under the terms of the GNU Affero General Public License as published by the
-    Free Software Foundation, either version 3 of the License, or (at your
-    option) any later version.
+	This program is free software:  you can redistribute it and/or modify it
+	under the terms of the GNU Affero General Public License as published by the
+	Free Software Foundation, either version 3 of the License, or (at your
+	option) any later version.
 
-    This program is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
-    for more details.
+	This program is distributed in the hope that it will be useful, but WITHOUT
+	ANY WARRANTY;  without even the implied warranty of MERCHANTABILITY or
+	FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
+	for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU Affero General Public License
+	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #>
 @{
 
@@ -22,7 +22,7 @@
 RootModule = 'src/PSPasswordGenerator.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.0.0'
+ModuleVersion = '3.0.1'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -37,7 +37,7 @@ Author = 'Colin Cogle'
 CompanyName = $null
 
 # Copyright statement for this module
-Copyright = '(c) 2016-2022 Colin Cogle. All rights reserved.'
+Copyright = '(c) 2016-2022, 2024 Colin Cogle. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Generate random passwords with the constraints you want.'
@@ -59,48 +59,47 @@ AliasesToExport = @('New-RandomPassword')
 
 # List of all files packaged with this module
 FileList = @(
-    'en-US/about_PSPasswordGenerator.help.txt',
-    'en-US/PSPasswordGenerator-help.xml',
-    'icon/PSPasswordGenerator.png',
-    'src/PSPasswordGenerator.psm1',
-    'AUTHORS',
-    'ChangeLog',
-    'CODE_OF_CONDUCT.md',
-    'CONTRIBUTING.md',
-    'COPYING',
-    'LICENSE',
-    'NEWS',
-    'PSPasswordGenerator.psd1',
-    'README.md'
+	'en-US/about_PSPasswordGenerator.help.txt',
+	'en-US/PSPasswordGenerator-help.xml',
+	'src/PSPasswordGenerator.psm1',
+	'AUTHORS.txt',
+	'ChangeLog.md',
+	'CODE_OF_CONDUCT.md',
+	'CONTRIBUTING.md',
+	'LICENSE.txt',
+	'NEWS.md',
+	'PSPasswordGenerator.psd1',
+	'README.md',
+	'SECURITY.md'
 )
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
 
-    PSData = @{
+	PSData = @{
 
-        # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows', 'wordlist')
+		# Tags applied to this module. These help with module discovery in online galleries.
+		Tags = @('Core', 'desktop', 'entropy', 'generator', 'get', 'Linux', 'macOS', 'maker', 'new', 'pass', 'passcode', 'password', 'PowerShell', 'PasswordGenerator', 'PSModule', 'pwsh', 'random', 'security', 'sysadmin', 'Windows', 'wordlist')
 
-        # A URL to the license for this module.
-        LicenseUri = 'https://www.gnu.org/licenses/agpl-3.0.en.html'
+		# A URL to the license for this module.
+		LicenseUri = 'https://www.gnu.org/licenses/agpl-3.0.en.html'
 
-        # A URL to the main website for this project.
-        ProjectUri = 'https://www.github.com/rhymeswithmogul/PSPasswordGenerator'
+		# A URL to the main website for this project.
+		ProjectUri = 'https://www.github.com/rhymeswithmogul/PSPasswordGenerator'
 
-        # A URL to an icon representing this module.
-        IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
+		# A URL to an icon representing this module.
+		IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
 
-        # ReleaseNotes of this module
-        ReleaseNotes = 'https://www.github.com/rhymeswithmogul/PSPasswordGenerator/main/blob/NEWS'
+		# ReleaseNotes of this module
+		ReleaseNotes = 'Packaging improvements.'
 
-        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        RequireLicenseAcceptance = $false
+		# Flag to indicate whether the module requires explicit user acceptance for install/update/save
+		RequireLicenseAcceptance = $false
 
-        # Beta?
-        #Prerelease = ''
+		# Beta?
+		Prerelease = 'git'
 
-    } # End of PSData hashtable
+	} # End of PSData hashtable
 
 } # End of PrivateData hashtable
 
