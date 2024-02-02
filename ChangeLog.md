@@ -1,7 +1,8 @@
 # PSPasswordGenerator change log
 
 ## Version 3.1.0 (in development)
-Packaging improvements.
+- This version is more secure, as the generated password is now built in memory as a `[SecureString]`, and only converted from one when this cmdlet is run with `-AsPlainText`.
+- Packaging improvements.
 
 ## Version 3.0.0 (March 17, 2022)
 - We can now generate human-friendly passwords from wordlists.

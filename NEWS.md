@@ -1,9 +1,9 @@
 # PSPasswordGenerator
 History of user-visible changes.
-Last update: 2024-01-31
+Last update: 2024-02-01
 
 ## PSPasswordGenerator version 3.0.1, in development
-Packaging improvements.
+This version builds the password in-memory as a `[SecureString]`, which means it is never stored insecurely.
 
 ## PSPasswordGenerator version 3.0.0, released 3/17/2022
 Not dead yet!  In this version, the cmdlet's verb has been changed.  It is now called `Get-RandomPassword` (but `New-RandomPassword` still works.)
