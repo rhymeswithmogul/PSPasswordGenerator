@@ -22,7 +22,7 @@
 RootModule = 'src/PSPasswordGenerator.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.0.1'
+ModuleVersion = '3.1.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -91,7 +91,8 @@ PrivateData = @{
 		IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
 
 		# ReleaseNotes of this module
-		ReleaseNotes = 'Packaging improvements.'
+		ReleaseNotes = '- Strings are now generated securely on supported platforms.
+- Packaging improvements.'
 
 		# Flag to indicate whether the module requires explicit user acceptance for install/update/save
 		RequireLicenseAcceptance = $false

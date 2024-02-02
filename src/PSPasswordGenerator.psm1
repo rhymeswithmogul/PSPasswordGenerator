@@ -17,10 +17,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #>
 
-#Requires -Version 3.0
+#Requires -Version 5.1
 
 # .ExternalHelp PSPasswordGenerator-help.xml
-Function Get-RandomPassword {
+Function Get-RandomPassword
+{
 	[CmdletBinding(DefaultParameterSetName='RandomSecurely')]
 	[OutputType([String], ParameterSetName='RandomInsecurely')]
 	[OutputType([String], ParameterSetName='WordsInsecurely')]
@@ -64,7 +65,7 @@ Function Get-RandomPassword {
 		Write-Warning 'The -NoSymbols parameter was also specified.  No extended ASCII characters will be used.'
 	}
 
-	$ret = ""
+	$ret = [SecureString]::new()
 	If ($PSCmdlet.ParameterSetName -Like 'Random*') {
 		For ($i = 0; $i -lt $Length; $i++) {
 			Do {
@@ -86,13 +87,13 @@ Function Get-RandomPassword {
 				# If the -NoSymbols parameter was specified, this loop will ensure
 				# that the character is neither a symbol nor in the extended ASCII
 				# character set.
-				
+
 			} While ($i -eq 0 -And $StartWithLetter -And -Not (($x -ge 65 -And $x -le 90) -Or ($x -ge 97 -And $x -le 122)))
 			# If the -StartWithLetter parameter was specified, this loop will make
 			# sure that the first character is an upper- or lower-case letter.
 
 			Write-Debug "SUCCESS: Adding character: $([char]$x)"
-			$ret += [char]$x
+			$ret.AppendChar($x)
 		}
 	}
 
@@ -103,7 +104,6 @@ Function Get-RandomPassword {
 		$allWords = Get-Content -LiteralPath $WordList -ErrorAction Stop
 		$culture  = (Get-Culture).TextInfo
 
-		$ret = ''
 		For ($i = 0; $i -lt $Words; $i++) {
 			# Pick a random word from the list.
 			$word = Get-Random $allWords
@@ -114,33 +114,41 @@ Function Get-RandomPassword {
 			}
 
 			# Stick something in between the words.
-			# Letters are 65-90 (caps) and 97-122 (lower)
-			$separator = 0
-			Do {
-				$ch = (Get-RandomPassword -Length 1 -NoSymbols:$NoSymbols -AsPlainText -UseExtendedAscii:$UseExtendedAscii)
-				Write-Debug "Trying separator $ch."
-				$separator = [Convert]::ToByte([Char]$ch)
-			} While (
-				($separator -ge 65 -and $separator -le 90)				<# No uppercase letters #> `
-				-or ($separator -ge 97 -and $separator -le 122)			<# No lowercase letters #> `
-				-or ($separator -ge 128 -and $separator -le 165)		<# No accented letters  #> `
-				-or ($separator -gt 165 -and -Not $UseExtendedAscii)	<# Unwanted extended ASCII #> `
-			)
+			# Letters are 65-90 (caps) and 97-122 (lower).
+			# Don't bother finding a separator if this is the final word.
+			If ($i -eq ($Words - 1))
+			{
+				Write-Debug "WORD=`"$word`""
+			}
+			Else
+			{
+				$separator = 0
+				Do {
+					$ch = (Get-RandomPassword -Length 1 -NoSymbols:$NoSymbols -AsPlainText -UseExtendedAscii:$UseExtendedAscii)
+					Write-Debug "Trying separator $ch."
+					$separator = [Convert]::ToByte([Char]$ch)
+				} While (
+					($separator -ge 65 -and $separator -le 90)				<# No uppercase letters #> `
+					-or ($separator -ge 97 -and $separator -le 122)			<# No lowercase letters #> `
+					-or ($separator -ge 128 -and $separator -le 165)		<# No accented letters  #> `
+					-or ($separator -gt 165 -and -Not $UseExtendedAscii)	<# Unwanted extended ASCII #> `
+				)
+				Write-Debug "WORD=`"$word`", SEP=`"$([Char]$separator)`""
 
-			Write-Debug "WORD=`"$word`", SEP=`"$([Char]$separator)`""
-			$ret += $word
-			$ret += [Char]$separator
+				$word += [Char]$separator
+			}
+
+			# SecureStrings can only be appended to one character at a time.
+			$word.ToCharArray() | ForEach-Object {
+				Write-Debug "Appending character: $_"
+				$ret.AppendChar($_)
+			}
 		}
-
-		# Chop off the final separator.
-		$ret = $ret.Substring(0, $ret.Length - 1)
 	}
 
 	If ($AsPlainText) {
-		Return $ret
+		Return (ConvertFrom-SecureString $ret -AsPlainText)
 	} Else {
-		$ss = ConvertTo-SecureString -AsPlainText -Force -String $ret
-		Remove-Variable -Name 'ret' -ErrorAction SilentlyContinue
-		Return $ss
+		Return $ret
 	}
 }
