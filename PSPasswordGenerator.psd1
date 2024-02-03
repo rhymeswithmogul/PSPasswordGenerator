@@ -92,6 +92,7 @@ PrivateData = @{
 
 		# ReleaseNotes of this module
 		ReleaseNotes = '- Strings are now generated securely on supported platforms.
+- Added a new ExcludeCharacters parameter which does as it says;  generated passwords will not include those characters.
 - Packaging improvements.'
 
 		# Flag to indicate whether the module requires explicit user acceptance for install/update/save

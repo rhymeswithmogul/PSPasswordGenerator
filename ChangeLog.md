@@ -1,7 +1,8 @@
 # PSPasswordGenerator change log
 
-## Version 3.1.0 (in development)
+## Version 3.1.0 (coming soon)
 - This version is more secure, as the generated password is now built in memory as a `[SecureString]`, and only converted from one when this cmdlet is run with `-AsPlainText`.
+- Added a new `-ExcludeCharacters` parameter which does as it says;  generated passwords will not include those characters.  Thanks to [GitHub user @wwc-trevor](https://github.com/wwc-trevor) for [the great idea](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/4) and for testing my work.
 - Packaging improvements.
 
 ## Version 3.0.0 (March 17, 2022)

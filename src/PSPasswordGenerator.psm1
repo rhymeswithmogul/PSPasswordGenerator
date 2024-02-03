@@ -39,6 +39,10 @@ Function Get-RandomPassword
 		[Parameter(ParameterSetName='RandomSecurely')]
 		[Switch] $StartWithLetter,
 
+		[AllowNull()]
+		[Alias('Exclude')]
+		[String] $ExcludeCharacters,
+
 		[Parameter(ParameterSetName='WordsInsecurely')]
 		[Parameter(ParameterSetName='WordsSecurely')]
 		[ValidateRange(1, [UInt32]::MaxValue)]
@@ -74,7 +78,11 @@ Function Get-RandomPassword
 						Do {
 							$x = Get-Random -Minimum 33 -Maximum 254
 							Write-Debug "Considering character: $([char]$x)"
-						} While ($x -eq 127 -Or (-Not $UseExtendedAscii -And $x -gt 127))
+						} While (
+							$x -eq 127 `
+							-Or (-Not $UseExtendedAscii -And $x -gt 127) `
+							-Or ($ExcludeCharacters.IndexOf($x) -ne -1)
+						)
 						# The above Do..While loop does this:
 						#  1. Don't allow ASCII 127 (delete).
 						#  2. Don't allow extended ASCII, unless the user wants it.
@@ -132,6 +140,7 @@ Function Get-RandomPassword
 					-or ($separator -ge 97 -and $separator -le 122)			<# No lowercase letters #> `
 					-or ($separator -ge 128 -and $separator -le 165)		<# No accented letters  #> `
 					-or ($separator -gt 165 -and -Not $UseExtendedAscii)	<# Unwanted extended ASCII #> `
+					-or ($ExcludeCharacters.IndexOf($x) -ne -1)
 				)
 				Write-Debug "WORD=`"$word`", SEP=`"$([Char]$separator)`""
 

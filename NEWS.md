@@ -5,6 +5,9 @@ Last update: 2024-02-01
 ## PSPasswordGenerator version 3.0.1, in development
 This version builds the password in-memory as a `[SecureString]`, which means it is never stored insecurely.
 
+In addition, I've added a new `-ExcludeCharacters`` parameter which does as it says;  generated passwords will not include those characters.  Thanks to [GitHub user @wwc-trevor](https://github.com/wwc-trevor) for [the great idea](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/4) and for testing my work.
+
+
 ## PSPasswordGenerator version 3.0.0, released 3/17/2022
 Not dead yet!  In this version, the cmdlet's verb has been changed.  It is now called `Get-RandomPassword` (but `New-RandomPassword` still works.)
 

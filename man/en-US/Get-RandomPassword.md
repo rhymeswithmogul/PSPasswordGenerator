@@ -14,26 +14,26 @@ Creates a random password.
 
 ### RandomSecurely (Default)
 ```
-Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-NoSymbols] [-UseAmbiguousCharacters]
- [-UseExtendedAscii] [<CommonParameters>]
+Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-ExcludeCharacters <String>] [-NoSymbols]
+ [-UseAmbiguousCharacters] [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### RandomInsecurely
 ```
-Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
- [-UseExtendedAscii] [<CommonParameters>]
+Get-RandomPassword [-Length <UInt32>] [-StartWithLetter] [-ExcludeCharacters <String>] [-AsPlainText]
+ [-NoSymbols] [-UseAmbiguousCharacters] [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### WordsSecurely
 ```
-Get-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-NoSymbols] [-UseAmbiguousCharacters]
- [-UseExtendedAscii] [<CommonParameters>]
+Get-RandomPassword -WordList <FileInfo> [-ExcludeCharacters <String>] [-Words <UInt32>] [-NoSymbols]
+ [-UseAmbiguousCharacters] [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ### WordsInsecurely
 ```
-Get-RandomPassword [-Words <UInt32>] -WordList <FileInfo> [-AsPlainText] [-NoSymbols] [-UseAmbiguousCharacters]
- [-UseExtendedAscii] [<CommonParameters>]
+Get-RandomPassword -WordList <FileInfo> [-ExcludeCharacters <String>] [-Words <UInt32>] [-AsPlainText]
+ [-NoSymbols] [-UseAmbiguousCharacters] [-UseExtendedAscii] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +70,13 @@ PS C:\> $svcAccountPassword = Get-RandomPassword -Length 240 -UseAmbigiousCharac
 ```
 
 Generates a 240-character password that can be as random as possible.  This is good practice for making service accounts in Active Directory Domain Services, where a human will never need to type the password by hand.
+
+### Example 5
+```powershell
+PS C:\> $RicohPassword = Get-RandomPassword -Length 15 -ExcludeCharacters '\#%&'
+```
+
+I've seen some printers that fail to parse passwords that contain certain characters.  This invocation will create a 15-character password that does not contain a backslash, pound sign, percent sign, or ampersand.  Note that the PowerShell runtime may attempt to parse this string, so it should be enclosed in single quotes.
 
 ## PARAMETERS
 
@@ -191,6 +198,26 @@ When generating a password made up of random words, the password should contain 
 Type: UInt32
 Parameter Sets: WordsSecurely, WordsInsecurely
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExcludeCharacters
+To create a password that does not use certain characters, specify this parameter.  Anything in the string will be excluded from consideration.
+
+Note that when using this to generate a word-based password, this will only exclude the characters from being used to separate words.  To exclude certain characters from words, edit the wordlist.
+
+The PowerShell runtime may attempt to parse some special characters inside the string, such as the dollar sign, backticks, parentheses, and/or curly braces.  Please make sure you escape any special characters properly, or enclose the string in single quotes to prevent the runtime from parsing the string.
+
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: Exclude
 
 Required: False
 Position: Named
