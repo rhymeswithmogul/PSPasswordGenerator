@@ -99,7 +99,7 @@ PrivateData = @{
 		RequireLicenseAcceptance = $false
 
 		# Beta?
-		Prerelease = 'git'
+		#Prerelease = 'git'
 
 	} # End of PSData hashtable
 
