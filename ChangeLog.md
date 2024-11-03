@@ -1,6 +1,9 @@
 # PSPasswordGenerator change log
 
-## Version 3.1.0 (coming soon)
+## Version 3.2.0 (not yet released)
+- Fixes a bug where the `-AsPlainText` parameter would fail on Windows PowerShell 5.1 because `ConvertFrom-SecureString -AsPlainText` doesn't exist on that version.  Thanks to [GitHub user @jrbilodeau](https://github.com/jrbilodeau) for reporting [this issue](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/7).
+
+## Version 3.1.0 (February 13, 2024)
 - This version is more secure, as the generated password is now built in memory as a `[SecureString]`, and only converted from one when this cmdlet is run with `-AsPlainText`.
 - Added a new `-ExcludeCharacters` parameter which does as it says;  generated passwords will not include those characters.  Thanks to [GitHub user @wwc-trevor](https://github.com/wwc-trevor) for [the great idea](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/4) and for testing my work.
 - Packaging improvements.

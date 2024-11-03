@@ -22,7 +22,7 @@
 RootModule = 'src/PSPasswordGenerator.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.1.0'
+ModuleVersion = '3.2.0'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Desktop', 'Core')
@@ -91,15 +91,13 @@ PrivateData = @{
 		IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
 
 		# ReleaseNotes of this module
-		ReleaseNotes = '- Strings are now generated securely on supported platforms.
-- Added a new ExcludeCharacters parameter which does as it says;  generated passwords will not include those characters.
-- Packaging improvements.'
+		ReleaseNotes = 'Fixes a bug preventing this from running on Windows PowerShell 5.1.'
 
 		# Flag to indicate whether the module requires explicit user acceptance for install/update/save
 		RequireLicenseAcceptance = $false
 
 		# Beta?
-		#Prerelease = 'git'
+		Prerelease = 'git'
 
 	} # End of PSData hashtable
 

@@ -1,12 +1,18 @@
 # PSPasswordGenerator
 History of user-visible changes.
-Last update: 2024-02-01
+Last update: 2024-11-03
 
-## PSPasswordGenerator version 3.0.1, in development
+## PSPasswordGenerator version 3.2.0, in development
+- Fixes a bug where the `-AsPlainText` parameter would fail on Windows PowerShell 5.1 because `ConvertFrom-SecureString -AsPlainText` doesn't exist on that version.  Thanks to [GitHub user @jrbilodeau](https://github.com/jrbilodeau) for reporting [this issue](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/7).
+
+## PSPasswordGenerator version 3.1.0, released 2024-02-13
+- This version is more secure, as the generated password is now built in memory as a `[SecureString]`, and only converted from one when this cmdlet is run with `-AsPlainText`.
+- Added a new `-ExcludeCharacters` parameter which does as it says;  generated passwords will not include those characters.  Thanks to [GitHub user @wwc-trevor](https://github.com/wwc-trevor) for [the great idea](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/4) and for testing my work.
+
+## PSPasswordGenerator version 3.0.1
 This version builds the password in-memory as a `[SecureString]`, which means it is never stored insecurely.
 
 In addition, I've added a new `-ExcludeCharacters`` parameter which does as it says;  generated passwords will not include those characters.  Thanks to [GitHub user @wwc-trevor](https://github.com/wwc-trevor) for [the great idea](https://github.com/rhymeswithmogul/PSPasswordGenerator/issues/4) and for testing my work.
-
 
 ## PSPasswordGenerator version 3.0.0, released 3/17/2022
 Not dead yet!  In this version, the cmdlet's verb has been changed.  It is now called `Get-RandomPassword` (but `New-RandomPassword` still works.)

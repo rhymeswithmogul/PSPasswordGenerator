@@ -156,7 +156,13 @@ Function Get-RandomPassword
 	}
 
 	If ($AsPlainText) {
-		Return (ConvertFrom-SecureString $ret -AsPlainText)
+		If ((Get-Command 'ConvertFrom-SecureString').Parameters.ContainsKey('AsPlainText')) {
+			Return (ConvertFrom-SecureString $ret -AsPlainText)
+		}
+		Else {
+			Return (ConvertFrom-SecureString $ret)
+
+		}
 	} Else {
 		Return $ret
 	}
