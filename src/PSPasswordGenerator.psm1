@@ -28,6 +28,7 @@ Function Get-RandomPassword
 	[OutputType([Security.SecureString], ParameterSetName='RandomSecurely')]
 	[OutputType([Security.SecureString], ParameterSetName='WordsSecurely')]
 	[Alias('New-RandomPassword')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'Force', Justification='This only exists in case people type `-AsPlainText -Force` accidentally, like they are forced to do with `ConvertTo-SecureString`.')]
 	Param(
 		[Parameter(ParameterSetName='RandomInsecurely')]
 		[Parameter(ParameterSetName='RandomSecurely')]
@@ -56,6 +57,10 @@ Function Get-RandomPassword
 		[Parameter(ParameterSetName='RandomInsecurely', Mandatory)]
 		[Parameter(ParameterSetName='WordsInsecurely', Mandatory)]
 		[Switch] $AsPlainText,
+
+		[Parameter(ParameterSetName='RandomInsecurely', DontShow)]
+		[Parameter(ParameterSetName='WordsInsecurely', DontShow)]
+		[Switch] $Force,
 
 		[Switch] $NoSymbols,
 

@@ -91,15 +91,13 @@ PrivateData = @{
 		IconUri = 'https://raw.githubusercontent.com/rhymeswithmogul/PSPasswordGenerator/main/icon/PSPasswordGenerator.png'
 
 		# ReleaseNotes of this module
-		ReleaseNotes = '- Strings are now generated securely on supported platforms.
-- Added a new ExcludeCharacters parameter which does as it says;  generated passwords will not include those characters.
-- Packaging improvements.'
+		ReleaseNotes = 'Add invisible `-Force` parameter to make this behave like `ConvertTo-SecureString -AsPlainText -Force`.'
 
 		# Flag to indicate whether the module requires explicit user acceptance for install/update/save
 		RequireLicenseAcceptance = $false
 
 		# Beta?
-		#Prerelease = 'git'
+		Prerelease = 'git'
 
 	} # End of PSData hashtable
 
